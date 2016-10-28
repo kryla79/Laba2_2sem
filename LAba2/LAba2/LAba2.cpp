@@ -7,6 +7,9 @@
 int main()
 {
 	int q;
-    return 0;
+ 
+	int f;
+	
+	return 0;
 }
 
