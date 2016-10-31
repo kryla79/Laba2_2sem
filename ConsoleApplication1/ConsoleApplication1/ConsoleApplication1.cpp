@@ -2,22 +2,24 @@
 //
 
 #include "stdafx.h"
-//#include "stdlib.h"
-#include "iostream"//работа ввода/вывода
+#include <stdlib.h>
+#include <iostream>//работа ввода/вывода
 #include "cstdlib" //работа функции system
 #include <ctime> // содержит time()
 using namespace std;
+int c = 0; //количество элементов
 
 
-void random(int c2) //выделение памяти и наполнение массива
+void random(int c) //выделение памяти и наполнение массива
 {
-	srand(time(NULL));
-	int *m = (int*)malloc(c2 * sizeof(int)); //m матрица, с2 кол-во элементов 
+	srand(time(nullptr)); //истинный рандом
+	int *m = (int*)malloc(c * sizeof(int)); //m матрица, с2 кол-во элементов 
 											//void* calloc(c, 1);
 
-	for (int i = 0; i < c2; i++)
+
+	for (int i = 0; i < c; i++)
 	{
-		m[i] = rand();
+		m[i] = rand();//*time(NULL);
 		cout << m[i] << endl;
 	}
 }
@@ -26,8 +28,7 @@ void random(int c2) //выделение памяти и наполнение массива
 int main()
 {
 	setlocale(LC_ALL, "RUSSIAN");//поддержка русского языка
-	int c = 0;
-	cout << "Количество элементов матрицы = ";
+		cout << "Количество элементов матрицы = ";
 	cin >> c; 
 	cout << endl;
 	random(c);
