@@ -3,10 +3,13 @@
 
 #include "stdafx.h"
 #include "stdlib.h"
+#include "iostream"
+using namespace std;
+
 
 int main()
 {
 	int ñ = 0;
-
+	cout << "d";
 }
 
