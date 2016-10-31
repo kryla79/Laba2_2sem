@@ -12,5 +12,3 @@ int main()
 	int ñ = 0;
 	cout << "d";
 }
-
-s
