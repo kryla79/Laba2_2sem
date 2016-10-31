@@ -13,14 +13,16 @@ int c = 0; //количество элементов
 void random(int c) //выделение памяти и наполнение массива
 {
 	srand(time(nullptr)); //неистинный рандом
-	int *m = (int*)malloc(c * sizeof(int)); //m матрица, с2 кол-во элементов 
-											//void* calloc(c, 1);
-
-
+	int *m = (int*)malloc(c * sizeof(int)); //m массив, с2 кол-во элементов 
+													
 	for (int i = 0; i < c; i++)
 	{
-		m[i] = rand(); //% sizeof(int) + 1;//*time(NULL);
-		cout << m[i] << endl;
+		for (int j = 0; j < c; j++)
+		{
+			m[i][j] = rand();
+			cout << m[i] << endl;
+		}/*[i] = rand();
+		cout << m[i] << endl;*/
 	}
 }
 
