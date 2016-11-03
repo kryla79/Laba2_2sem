@@ -12,7 +12,6 @@ int t = 0; //количество сдвигов
 
 
 void computing(int); //прототип функции
-void move(int, int); 
 
 int main()
 {
@@ -22,22 +21,14 @@ int main()
 	cout << endl;
 	cout << " оличество сдвигов матрицы = ";
 	cin >> t;
-	/*int **a = */computing(c);
-	//move(t, **a);
-	/*for (int i = 0; i < c; i++) //вывод 
-	{
-		for (int j = 0; j < c; j++)
-			cout << setw(5) << a[i][j] << " ";
-		cout << endl;
-	}*/
-
+	computing(c);
 	system("pause");
 }
 
 
 void computing(int c) //выделение пам€ти, наполнение массива и его отображение
 {
-	int lstdgt=0;//последнее значение в матрице
+	int lstdgt;//последнее значение в матрице
 	srand(time(nullptr)); //неистинный рандом
 	int **m = (int **)malloc(c * sizeof(int*)); //выделение пам€ти, m -- матрица
 	for (int i = 0; i < c; i++)
@@ -49,143 +40,67 @@ void computing(int c) //выделение пам€ти, наполнение массива и его отображение
 			m[i][j] = rand();
 		}
 	}
-	
+
 	for (int i = 0; i < c; i++) //вывод 
 	{
 		for (int j = 0; j < c; j++)
 		{
 			cout << setw(5) << m[i][j] << " ";
-			if (c % 2 == 1)
-				lstdgt = m[c - 1][c - 1];
-			else lstdgt= m[0][c - 1];
 		}
 		cout << endl;
 	}
-	
+
 
 	cout << endl;
-	//m[0][0] = lstdgt;
-	for(int j=c-1;j>=0;j--) //карусель
-	{
-		if (j==0||j%2==0)
-		{
-			for (int i = c - 1;i > 0; i--)
-			{
-				if (i == 1)
-				{
-					if (j == 0)
-					{
-						m[i][j] = m[i - 1][j];
-						m[0][0] = lstdgt;
-					}
-					else
-					{
-						m[i][j] = m[i - 1][j];
-						m[0][j] = m[0][j - 1];
-					}
-				}
-				else {
-					//if (j != 0)
-						{
-							m[i][j] = m[i - 1][j];
-						}
 
-					/*else
+	for (int tc = 0; tc < t; tc++) 
+	{
+		if (c % 2 == 1)
+			lstdgt = m[c - 1][c - 1];
+		else lstdgt = m[0][c - 1];
+		for (int j = c - 1;j >= 0;j--) //карусель
+		{
+			if (j == 0 || j % 2 == 0)
+			{
+				for (int i = c - 1;i > 0; i--)
+				{
+					if (i == 1)
+					{
+						if (j == 0)
 						{
 							m[i][j] = m[i - 1][j];
 							m[0][0] = lstdgt;
-						}*/
+						}
+						else
+						{
+							m[i][j] = m[i - 1][j];
+							m[0][j] = m[0][j - 1];
+						}
 					}
+					else {
+						m[i][j] = m[i - 1][j];
+					}
+				}
 			}
+
+			if (j % 2 == 1)
+				for (int i = 1; i < c;i++)
+				{
+					if (i == 1)
+						m[0][j] = m[1][j];
+					if (i == c - 1)
+						m[i][j] = m[i][j - 1];
+					else
+						m[i][j] = m[i + 1][j];
+				}
 		}
 
-		if (j % 2 == 1)
-			for (int i = 1; i < c;i++)
-			{
-				if (i == 1)
-					m[0][j] = m[1][j];
-				if (i == c - 1)
-					m[i][j] = m[i][j - 1];
-				else
-					m[i][j] = m[i + 1][j];
-			}
-		
-		/*if (j % 2 == 1)
+		for (int i = 0; i < c; i++) //вывод 
 		{
-			for (int i = 0; i>=c; i++)
-
-			{
-				if (i = c)
-					if (j==0)
-
-					m[i-1][j] = m[i-1][j - 1];
-				else
-					m[i][j] = m[i + 1][j];
-			}
-		}*/
-	}
-	
-		
-	/*int *buff = (int*)malloc(c*sizeof(int));//буфер матрицы
-	for(int j=0;j<c;j++)
-	{
-		if (j%2==0)
-		{
-			for (int i = c - 1; i > 0; i--)
-			{
-				buff[j] = m[i][j];
-				m[i][j] = m[i - 1][j];
-			}
+			for (int j = 0; j < c; j++)
+				cout << setw(5) << m[i][j] << " ";
+			cout << endl;
 		}
-		if (j % 2 == )
-		{
-			for (int i = c - 1; i > 0; i--)
-			{
-				buff[j] = m[i][j];
-				m[i][j] = m[i - 1][j];
-			}
-		}
-	}*/
-
-
-
-
-
-
-
-
-	/*for (int i = c-1; i > 0; i--)
-	{
-		for (int j = 0; j < c; j++)
-		{
-			if (j == 0)
-			{
-				m[0][0] = m[c - 1][c - 1];
-			}
-			else
-			{
-				m[c-1][c-1] = m[c - 1][j];
-			}
-			m[i][j] = m[i - 1][j];
-		}
-	}*/
-
-	for (int i = 0; i < c; i++) //вывод 
-	{
-		for (int j = 0; j < c; j++)
-			cout << setw(10) << m[i][j] << " ";
 		cout << endl;
 	}
-
-		//return m;
 }
-
-/*void move(int t, int **a)
-{
-	for (int i = 0; i < c; i++) //вывод 
-	{
-		for (int j = 0; j < c; j++)
-			cout << setw(5) << a[i][j] << " ";
-		cout << endl;
-	}
-}*/
