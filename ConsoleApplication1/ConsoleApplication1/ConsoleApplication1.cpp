@@ -1,6 +1,3 @@
-// ConsoleApplication1.cpp: определяет точку входа для консольного приложения.
-//
-
 #include "stdafx.h"
 #include <stdlib.h>
 #include <iostream>//работа ввода/вывода
@@ -8,25 +5,22 @@
 #include <iomanip>// работа setw()
 using namespace std;
 int c = 0; //количество элементов
-int t = 0; //количество сдвигов
-
-
-void computing(int); //прототип функции
+//int t = 0; количество сдвигов
+void computing(int, int); //прототип функции
 
 int main()
 {
+	int t = 0;
 	setlocale(LC_ALL, "RUSSIAN");//поддержка русского языка
 	cout << "Размер матрицы = ";
 	cin >> c; 
-	cout << endl;
 	cout << "Количество сдвигов матрицы = ";
 	cin >> t;
-	computing(c);
+	computing(c, t);
 	system("pause");
 }
 
-
-void computing(int c) //выделение памяти, наполнение массива и его отображение
+void computing(int c, int t)
 {
 	int lstdgt;//последнее значение в матрице
 	srand(time(nullptr)); //неистинный рандом
@@ -48,9 +42,11 @@ void computing(int c) //выделение памяти, наполнение массива и его отображение
 		if (c % 2 == 1)
 			lstdgt = m[c - 1][c - 1];
 		else lstdgt = m[0][c - 1];
-		for (int j = c - 1;j >= 0;j--) //карусель
+#pragma.region Карусель
+		for (int j = c - 1;j >= 0;j--)
 		{
-			if (j == 0 || j % 2 == 0)
+#pragma.region Нечётные ряды. j=0, 2, 4...
+			if (j % 2 == 0)
 				for (int i = c - 1;i > 0; i--)				
 					if (i == 1)
 					{
@@ -66,7 +62,9 @@ void computing(int c) //выделение памяти, наполнение массива и его отображение
 						}
 					}
 					else m[i][j] = m[i - 1][j];
-			if (j % 2 == 1)
+#pragma.endregion  
+#pragma region Чётные ряды. j=1, 3, 5...
+					if (j % 2 == 1)
 				for (int i = 1; i < c;i++)
 				{
 					if (i == 1)
@@ -77,6 +75,8 @@ void computing(int c) //выделение памяти, наполнение массива и его отображение
 						m[i][j] = m[i + 1][j];
 				}
 		}
+#pragma endregion
+#pragma.endregion
 		for (int i = 0; i < c; i++) //вывод 
 		{
 			for (int j = 0; j < c; j++)
