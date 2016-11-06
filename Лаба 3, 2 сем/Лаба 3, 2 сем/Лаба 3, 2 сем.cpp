@@ -1,19 +1,18 @@
-// Лаба 3, 2 сем.cpp: определяет точку входа для консольного приложения.
-//
+// argc_argv.cpp: определяет точку входа для консольного приложения.
 
 #include "stdafx.h"
 #include <iostream>
+using namespace std;
 
-void main(int argc, char *argv[])
+void main(int argc, char* argv[])
 {
-	if (argc > 0)
-	{
-		std::cout<<argc << argv[1];
-	}
+	if (argc > 1)// если передаем аргументы, то argc будет больше 1(в зависимости от кол-ва аргументов)
+		{
+			cout << argv[1] << endl;// вывод второй строки из массива указателей на строки
+		}
 	else
-	{
-		std::cout <<argc;
-		
-	}
+		{
+			cout << "Not arguments" << endl;
+		}
+	system("pause");
 }
-
