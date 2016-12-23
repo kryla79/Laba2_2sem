@@ -1,7 +1,9 @@
 #include "stdafx.h"
-#include <stdlib.h>
+//#include <locale>//dont work
+//#include <cstdlib>//dont work
+#include <locale.h>
 #include <iostream>//работа ввода/вывода
-#include <ctime> // содержит time()
+#include <time.h> // содержит time(), ctime не работал
 #include <iomanip>// работа setw()
 using namespace std;
 int c = 0; //количество элементов
@@ -18,15 +20,16 @@ int main()
 	cin >> t;
 	computing(c, t);
 	system("pause");
+
 }
 
 void computing(int c, int t)
 {
 	int lstdgt;//последнее значение в матрице
 	srand(time(nullptr)); //неистинный рандом
-	int **m = (int **)malloc(c * sizeof(int*)); //выделение памяти, m -- матрица
+	int **m = static_cast<int **>(malloc(c * sizeof(int*))); //выделение памяти, m -- матрица
 	for (int i = 0; i < c; i++)
-		m[i] = (int*)malloc(c * sizeof(int));
+		m[i] = static_cast<int*>(malloc(c * sizeof(int)));
 	for (int i = 0; i < c; i++)
 		for (int j = 0; j < c; j++)
 			m[i][j] = rand();
@@ -85,4 +88,5 @@ void computing(int c, int t)
 		}
 		cout << endl;
 	}
+	free(*m);
 }
