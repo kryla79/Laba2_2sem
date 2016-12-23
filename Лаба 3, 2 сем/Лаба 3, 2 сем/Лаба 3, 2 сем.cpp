@@ -3,9 +3,10 @@
 #include "stdafx.h"
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <cstring>
+//#include <cstring>
 #include <fstream>
-#include <string>
+//#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -13,15 +14,23 @@ void main(int argc, char *argv[])
 {
 	int b = 0;
 	int e = 0;
+	//char diapazon[] = "1,2,5,7-9"; правка №2
 	int p = 0;
 	string way;
 	char keys[] = "bepC";
+	/*for (int i = 0; strlen(diapazon); i++)
+		if (diapazon[i] == '-')
+			diapazon[strlen(diapazon) + 1];*/ //(раскоментировать при удачной правке)
+	//писать здесь правка №2
+
+	
+		
 	
 	for(int i=1; i<argc; i++)
 	{
 		if (strspn(argv[i], keys) > 1) //проверка на две буквы в одном аргументе
 		{
-			cout << "Неверный ввод аргумента "<<i;
+			std::cout << "Неверный ввод аргумента "<<i;
 			//system("pause");
 			break;
 		}
@@ -59,7 +68,50 @@ void main(int argc, char *argv[])
 	cout << "\n arg b = " << b << endl;
 	cout << "\n arg e = " << e << endl;
 	cout << "\n arg p = " << p << endl;
-	cout << "\n" << way << endl;
+	cout << "\n" << way << endl<<endl;
+	
+	ifstream F; //далее следует код, который я писал в полусознательном состоянии и я его вряд-ли смогу объяснить
+	F.open(way, ios::in);
+	char s[256];
+	string w;
+	if (F)
+	{
+		while (!F.eof())
+		{
+			int words = 0;
+			F.getline(s, 256);
+			cout << s <<endl;
+			istringstream iss(s);
+			char *pstr= strtok(s, " ");
+			while (pstr != nullptr)
+			{
+				pstr = strtok(nullptr, " ");
+				words++;
+
+			}
+
+			for (int i = 0; i < words; i++)
+			{
+				iss >> w;
+				if (i==p)
+				{				
+				cout << w <<endl;
+				}
+			}
+		}
+	}
+//	istringstream iss(s);
+//	int i = 1;
+/*	while (i <= 3)
+	{
+		iss >> w;
+		++i;
+	}*/
+	
+	
+	
+	
+	F.close();	
 	system("pause");
 	
 	
